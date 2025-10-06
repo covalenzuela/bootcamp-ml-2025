@@ -12,7 +12,17 @@
 - **Archivo local:** `../data/raw/dataset_clinico_simulado_200.csv` *(no se versiona en GitHub)*.  
 - **Columnas esperadas:** `texto_clinico, edad, genero, afeccion, gravedad`.  
 - **Clases:** leve, moderado, severo.  
-- **Split:** 80/20 estratificado (`random_state=42`).
+- **Split:** 80/20 estratificado (`random_state=42`) → 160 filas de train, 196 features TF‑IDF.
+- **Stats del preprocesamiento:** longitud media ≈ **6.95** tokens; vocabulario ≈ **70.0**; palabras totales ≈ **1390.0**.
+
+---
+
+## Pipeline
+1. Limpieza y normalización (regex, minúsculas, stopwords ES).
+2. **TF‑IDF** sobre `texto_proc` y modelo **MultinomialNB**.
+3. Métricas (accuracy, **macro‑F1**), matriz de confusión y **top‑k palabras** por clase (interpretabilidad).
+4. (**Opcional**) **BERT**: `BertForSequenceClassification` + tokenizer; comparación NB vs BERT.
+5. (**Opcional**) **Fairness** por subgrupos (p.ej. `genero`): accuracy/F1 macro por grupo.
 
 ### Descarga automatizada (opcional, si no tienes el CSV local)
 ```python
@@ -36,7 +46,7 @@ python -m spacy download es_core_news_sm   # si usarás lematización en españo
 ## Ejecución
 1) Abrir `notebooks/clasificacion_notas_clinicas.ipynb` (Colab o local).  
 2) Pipeline: **EDA → Preproc → TF-IDF → NB → (BERT opc.) → Métricas → Figuras**.  
-3) Exporta figuras a `reports/figures/` y enlázalas abajo.
+3) Exporta figuras a `reports/figures/`.
 
 ---
 
@@ -177,6 +187,11 @@ adulto  1.0          1.0       1.0   11
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 ```
+
+---
+
+## Ética
+Datos **simulados** y de uso docente; este proyecto **no es** un sistema de diagnóstico.
 
 ---
 
