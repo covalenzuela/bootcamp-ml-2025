@@ -1,0 +1,4 @@
+-r ../../../requirements.txt
+
+transformers==4.43.3
+torch>=2.2.0

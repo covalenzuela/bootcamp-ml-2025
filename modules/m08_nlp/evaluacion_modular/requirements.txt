@@ -1,0 +1,8 @@
+# Hereda las comunes del repo
+-r ../../../requirements.txt
+
+# Extras específicos del Módulo 8 (eval modular)
+spacy==3.7.4
+transformers==4.43.3
+torch>=2.2.0
+sentencepiece==0.2.0
